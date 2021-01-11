@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="myEvent">
+            <h2><span jhiTranslate="eventAdminApp.myEvent.detail.title">My Event</span> {{ myEvent.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="eventAdminApp.myEvent.title">Title</span></dt>
+                <dd>
+                    <span>{{ myEvent.title }}</span>
+                </dd>
+                <dt><span jhiTranslate="eventAdminApp.myEvent.description">Description</span></dt>
+                <dd>
+                    <span>{{ myEvent.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="eventAdminApp.myEvent.fullDay">Full Day</span></dt>
+                <dd>
+                    <span>{{ myEvent.fullDay }}</span>
+                </dd>
+                <dt><span jhiTranslate="eventAdminApp.myEvent.eventStart">Event Start</span></dt>
+                <dd>
+                    <span>{{ myEvent.eventStart }}</span>
+                </dd>
+                <dt><span jhiTranslate="eventAdminApp.myEvent.eventEnd">Event End</span></dt>
+                <dd>
+                    <span>{{ myEvent.eventEnd }}</span>
+                </dd>
+                <dt><span jhiTranslate="eventAdminApp.myEvent.location">Location</span></dt>
+                <dd>
+                    <span>{{ myEvent.location }}</span>
+                </dd>
+                <dt><span jhiTranslate="eventAdminApp.myEvent.eventImage">Event Image</span></dt>
+                <dd>
+                    <div *ngIf="myEvent.eventImage">
+                        <a (click)="openFile(myEvent?.eventImageContentType!, myEvent?.eventImage)">
+                            <img [src]="'data:' + myEvent.eventImageContentType + ';base64,' + myEvent.eventImage" style="max-width: 100%;" alt="myEvent image"/>
+                        </a>
+                        {{ myEvent.eventImageContentType }}, {{ byteSize(myEvent.eventImage) }}
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/my-event', myEvent.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

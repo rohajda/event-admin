@@ -1,0 +1,28 @@
+{
+  "eventAdminApp": {
+    "myEvent": {
+      "home": {
+        "title": "My Events",
+        "createLabel": "Pridať My Event",
+        "createOrEditLabel": "Pridať alebo upraviť My Event",
+        "notFound": "No My Events found"
+      },
+      "created": "Bol vytvorený potomok entity My Event s identifikátorom {{ param }}",
+      "updated": "Potomok entity My Event s identifikátorom {{ param }} bol upravený.",
+      "deleted": "Potomok entity My Event s identifikátorom {{ param }} bol vymazaný.",
+      "delete": {
+        "question": "Ste si istý, že chcete vymazať My Event {{ id }}?"
+      },
+      "detail": {
+        "title": "My Event"
+      },
+      "title": "Title",
+      "description": "Description",
+      "fullDay": "Full Day",
+      "eventStart": "Event Start",
+      "eventEnd": "Event End",
+      "location": "Location",
+      "eventImage": "Event Image"
+    }
+  }
+}

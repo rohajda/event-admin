@@ -1,0 +1,28 @@
+{
+  "eventAdminApp": {
+    "myEvent": {
+      "home": {
+        "title": "My Events",
+        "createLabel": "Create a new My Event",
+        "createOrEditLabel": "Create or edit a My Event",
+        "notFound": "No My Events found"
+      },
+      "created": "A new My Event is created with identifier {{ param }}",
+      "updated": "A My Event is updated with identifier {{ param }}",
+      "deleted": "A My Event is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete My Event {{ id }}?"
+      },
+      "detail": {
+        "title": "My Event"
+      },
+      "title": "Title",
+      "description": "Description",
+      "fullDay": "Full Day",
+      "eventStart": "Event Start",
+      "eventEnd": "Event End",
+      "location": "Location",
+      "eventImage": "Event Image"
+    }
+  }
+}
