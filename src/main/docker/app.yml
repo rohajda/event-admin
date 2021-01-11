@@ -1,0 +1,8 @@
+version: '2'
+services:
+  eventadmin-app:
+    build: ../../..
+    container_name: eventadmin-app
+    environment:
+    ports:
+      - 8081:8081
