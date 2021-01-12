@@ -1,10 +1,10 @@
-import { Body, Param, Post, Res, UseGuards, Controller, Get, Logger, Req, UseInterceptors } from '@nestjs/common';
-import { Response, Request } from 'express';
-import { AuthGuard, Roles, RoleType, RolesGuard } from '../../security';
+import { Body, Controller, Get, Logger, Param, Post, Req, Res, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Request, Response } from 'express';
+import { AuthGuard, Roles, RolesGuard, RoleType } from '../../security';
 import { PasswordChangeDTO } from '../../service/dto/password-change.dto';
 import { UserDTO } from '../../service/dto/user.dto';
 import { LoggingInterceptor } from '../../client/interceptors/logging.interceptor';
-import { ApiBearerAuth, ApiUseTags, ApiResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
 import { AuthService } from '../../service/auth.service';
 
 @Controller('api')
@@ -13,7 +13,8 @@ import { AuthService } from '../../service/auth.service';
 export class AccountController {
     logger = new Logger('AccountController');
 
-    constructor(private readonly authService: AuthService) {}
+    constructor(private readonly authService: AuthService) {
+    }
 
     @Post('/register')
     @ApiOperation({ title: 'Register user' })
@@ -94,8 +95,6 @@ export class AccountController {
     }
 
     @Post('/account/reset-password/init')
-    @ApiBearerAuth()
-    @UseGuards(AuthGuard)
     @ApiOperation({ title: 'Send an email to reset the password of the user' })
     @ApiResponse({
         status: 201,
@@ -103,7 +102,7 @@ export class AccountController {
         type: 'string',
     })
     requestPasswordReset(@Req() req: Request, @Body() email: string, @Res() res: Response): any {
-        return res.sendStatus(500);
+        return res.sendStatus(201);
     }
 
     @Post('/account/reset-password/finish')

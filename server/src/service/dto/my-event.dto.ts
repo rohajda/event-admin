@@ -7,35 +7,35 @@ import { BaseDTO } from './base.dto';
  * A MyEvent DTO object.
  */
 export class MyEventDTO extends BaseDTO {
-  @IsNotEmpty()
-  @MaxLength(120)
-  @ApiModelProperty({ description: 'title field' })
-  title: string;
+    @IsNotEmpty()
+    @MaxLength(120)
+    @ApiModelProperty({ description: 'title field' })
+    title: string;
 
-  @IsNotEmpty()
-  @MaxLength(2000)
-  @ApiModelProperty({ description: 'description field' })
-  description: string;
+    @IsNotEmpty()
+    @MaxLength(2000)
+    @ApiModelProperty({ description: 'description field' })
+    description: string;
 
-  @ApiModelProperty({ description: 'fullDay field', required: false })
-  fullDay: boolean;
+    @ApiModelProperty({ description: 'fullDay field', required: false })
+    fullDay: boolean;
 
-  @IsNotEmpty()
-  @ApiModelProperty({ description: 'eventStart field' })
-  eventStart: any;
+    @IsNotEmpty()
+    @ApiModelProperty({ description: 'eventStart field' })
+    eventStart: any;
 
-  @IsNotEmpty()
-  @ApiModelProperty({ description: 'eventEnd field' })
-  eventEnd: any;
+    @IsNotEmpty()
+    @ApiModelProperty({ description: 'eventEnd field' })
+    eventEnd: any;
 
-  @MaxLength(200)
-  @ApiModelProperty({ description: 'location field', required: false })
-  location: string;
+    @MaxLength(200)
+    @ApiModelProperty({ description: 'location field', required: false })
+    location: string;
 
-  @ApiModelProperty({ description: 'eventImage field', required: false })
-  eventImage: any;
+    @ApiModelProperty({ description: 'eventImage field', required: false })
+    eventImage: any;
 
-  eventImageContentType: string;
+    eventImageContentType: string;
 
-  // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
 }

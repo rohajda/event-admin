@@ -1,22 +1,24 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
+import { JhiDataUtils, JhiEventManager, JhiEventWithContent, JhiFileLoadError } from 'ng-jhipster';
 
 import { IMyEvent, MyEvent } from 'app/shared/model/my-event.model';
 import { MyEventService } from './my-event.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-my-event-update',
+  styleUrls: ['./my-event-update.component.scss'],
   templateUrl: './my-event-update.component.html'
 })
-export class MyEventUpdateComponent implements OnInit {
+export class MyEventUpdateComponent implements OnInit, OnDestroy {
   isSaving = false;
 
   editForm = this.fb.group({
@@ -31,6 +33,8 @@ export class MyEventUpdateComponent implements OnInit {
     eventImageContentType: []
   });
 
+  private subscriptions: Subscription[] = [];
+
   constructor(
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
@@ -41,15 +45,34 @@ export class MyEventUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ myEvent }) => {
+    const newEventInitSub = this.activatedRoute.data.subscribe(({ myEvent }) => {
       if (!myEvent.id) {
-        const today = moment().startOf('day');
-        myEvent.eventStart = today;
-        myEvent.eventEnd = today;
+        myEvent.eventStart = moment();
+        myEvent.eventEnd = moment().add(30, 'minute');
       }
 
       this.updateForm(myEvent);
     });
+    this.subscriptions.push(newEventInitSub);
+
+    const startDateSub = this.editForm.controls.eventStart.valueChanges
+      .pipe(
+        tap(value => {
+          if (value.isAfter(this.editForm.controls.eventEnd.value)) {
+            const newEndDate = moment(value).add(30, 'minute');
+            this.editForm.controls.eventEnd.setValue(newEndDate);
+          }
+        })
+      )
+      .subscribe();
+    this.subscriptions.push(startDateSub);
+  }
+
+  /**
+   * On destroy
+   */
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sb => sb.unsubscribe());
   }
 
   updateForm(myEvent: IMyEvent): void {
@@ -135,5 +158,21 @@ export class MyEventUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  /**
+   * Checking control validation
+   *
+   * @param controlName: string => Equals to formControlName
+   * @param validationType: string => Equals to validators name
+   */
+  isControlError(controlName: string, validationType: string): boolean {
+    const control = this.editForm.controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
   }
 }

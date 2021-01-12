@@ -73,6 +73,15 @@
           "minlength": "Your confirmation password is required to be at least 4 characters.",
           "maxlength": "Your confirmation password cannot be longer than 50 characters."
         },
+        "username": {
+          "required": "Your username is required."
+        },
+        "endDate": {
+          "before": "Date cannot be before begining"
+        },
+        "password": {
+          "required": "Password is required."
+        },
         "email": {
           "required": "Your email is required.",
           "invalid": "Your email is invalid.",

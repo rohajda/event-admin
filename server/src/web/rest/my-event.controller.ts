@@ -1,9 +1,21 @@
-import { Body, Controller, Delete, Get, Logger, Param, Post as PostMethod, Put, UseGuards, Req, UseInterceptors } from '@nestjs/common';
-import { ApiBearerAuth, ApiUseTags, ApiResponse, ApiOperation } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Logger,
+  Param,
+  Post as PostMethod,
+  Put,
+  Req,
+  UseGuards,
+  UseInterceptors
+} from '@nestjs/common';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
 import { Request } from 'express';
 import { MyEventDTO } from '../../service/dto/my-event.dto';
 import { MyEventService } from '../../service/my-event.service';
-import { PageRequest, Page } from '../../domain/base/pagination.entity';
+import { Page, PageRequest } from '../../domain/base/pagination.entity';
 import { AuthGuard, Roles, RolesGuard, RoleType } from '../../security';
 import { HeaderUtil } from '../../client/header-util';
 import { LoggingInterceptor } from '../../client/interceptors/logging.interceptor';
@@ -16,7 +28,8 @@ import { LoggingInterceptor } from '../../client/interceptors/logging.intercepto
 export class MyEventController {
   logger = new Logger('MyEventController');
 
-  constructor(private readonly myEventService: MyEventService) {}
+  constructor(private readonly myEventService: MyEventService) {
+  }
 
   @Get('/')
   @Roles(RoleType.USER)
@@ -26,6 +39,7 @@ export class MyEventController {
     type: MyEventDTO
   })
   async getAll(@Req() req: Request): Promise<MyEventDTO[]> {
+    console.log(req.query.sort);
     const pageRequest: PageRequest = new PageRequest(req.query.page, req.query.size, req.query.sort);
     const [results, count] = await this.myEventService.findAndCount({
       skip: +pageRequest.page * pageRequest.size,

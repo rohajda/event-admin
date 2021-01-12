@@ -7,7 +7,7 @@
     "messages": {
       "validate": {
         "login": {
-          "required": "Používateľské meno už existuje.",
+          "required": "Používateľské meno je povinné.",
           "minlength": "Používateľské meno musí mať aspoň 1 znak.",
           "maxlength": "Používateľské meno nesmie byť dlhšie ako 50 znakov.",
           "pattern": "Používateľské meno môže obsahovať len malé písmená a číslice."

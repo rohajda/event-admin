@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
@@ -7,6 +7,7 @@ import { LoginService } from 'app/core/login/login.service';
 
 @Component({
   selector: 'jhi-login-modal',
+  styleUrls: ['./login.component.scss'],
   templateUrl: './login.component.html'
 })
 export class LoginModalComponent implements AfterViewInit {
@@ -16,16 +17,23 @@ export class LoginModalComponent implements AfterViewInit {
   authenticationError = false;
 
   loginForm = this.fb.group({
-    username: [''],
-    password: [''],
+    username: ['', Validators.required],
+    password: ['', Validators.required],
     rememberMe: [false]
   });
 
-  constructor(private loginService: LoginService, private router: Router, public activeModal: NgbActiveModal, private fb: FormBuilder) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    public activeModal: NgbActiveModal,
+    private cdr: ChangeDetectorRef,
+    private fb: FormBuilder
+  ) {}
 
   ngAfterViewInit(): void {
     if (this.username) {
       this.username.nativeElement.focus();
+      this.cdr.detectChanges();
     }
   }
 
@@ -69,5 +77,21 @@ export class LoginModalComponent implements AfterViewInit {
   requestResetPassword(): void {
     this.activeModal.dismiss('to state requestReset');
     this.router.navigate(['/account/reset', 'request']);
+  }
+
+  /**
+   * Checking control validation
+   *
+   * @param controlName: string => Equals to formControlName
+   * @param validationType: string => Equals to validators name
+   */
+  isControlError(controlName: string, validationType: string): boolean {
+    const control = this.loginForm.controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
   }
 }

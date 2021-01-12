@@ -14,13 +14,20 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     EventAdminSharedModule,
     EventAdminCoreModule,
     EventAdminHomeModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatMomentModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     EventAdminEntityModule,
     EventAdminAppRoutingModule

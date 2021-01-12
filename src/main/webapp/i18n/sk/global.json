@@ -71,6 +71,15 @@
           "minlength": "Vaše potvrdenie hesla musí mať aspoň 4 znakov.",
           "maxlength": "Vaše potvrdenie hesla nemôže byť dlhšie ako 50 znakov."
         },
+        "username": {
+          "required": "Používateľské meno je povinné "
+        },
+        "password": {
+          "required": "Používateľské heslo je povinné "
+        },
+        "endDate": {
+          "before": "Dátum nemôže byť skor ako začiatok"
+        },
         "email": {
           "required": "Email je povinný.",
           "invalid": "Zadaný email nie je validný.",

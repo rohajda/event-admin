@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { PasswordResetInitService } from './password-reset-init.service';
@@ -26,5 +26,21 @@ export class PasswordResetInitComponent implements AfterViewInit {
 
   requestReset(): void {
     this.passwordResetInitService.save(this.resetRequestForm.get(['email'])!.value).subscribe(() => (this.success = true));
+  }
+
+  /**
+   * Checking control validation
+   *
+   * @param controlName: string => Equals to formControlName
+   * @param validationType: string => Equals to validators name
+   */
+  isControlError(controlName: string, validationType: string): boolean {
+    const control = this.resetRequestForm.controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { JhiLanguageService } from 'ng-jhipster';
@@ -9,6 +9,7 @@ import { RegisterService } from './register.service';
 
 @Component({
   selector: 'jhi-register',
+  styleUrls: ['./register.component.scss'],
   templateUrl: './register.component.html'
 })
 export class RegisterComponent implements AfterViewInit {
@@ -32,12 +33,14 @@ export class RegisterComponent implements AfterViewInit {
     private languageService: JhiLanguageService,
     private loginModalService: LoginModalService,
     private registerService: RegisterService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngAfterViewInit(): void {
     if (this.login) {
       this.login.nativeElement.focus();
+      this.cdr.detectChanges();
     }
   }
 
@@ -53,10 +56,17 @@ export class RegisterComponent implements AfterViewInit {
     } else {
       const login = this.registerForm.get(['login'])!.value;
       const email = this.registerForm.get(['email'])!.value;
-      this.registerService.save({ login, email, password, langKey: this.languageService.getCurrentLanguage() }).subscribe(
-        () => (this.success = true),
-        response => this.processError(response)
-      );
+      this.registerService
+        .save({
+          login,
+          email,
+          password,
+          langKey: this.languageService.getCurrentLanguage()
+        })
+        .subscribe(
+          () => (this.success = true),
+          response => this.processError(response)
+        );
     }
   }
 
@@ -72,5 +82,21 @@ export class RegisterComponent implements AfterViewInit {
     } else {
       this.error = true;
     }
+  }
+
+  /**
+   * Checking control validation
+   *
+   * @param controlName: string => Equals to formControlName
+   * @param validationType: string => Equals to validators name
+   */
+  isControlError(controlName: string, validationType: string): boolean {
+    const control = this.registerForm.controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
   }
 }
