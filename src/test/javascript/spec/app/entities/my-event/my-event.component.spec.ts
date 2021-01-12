@@ -77,7 +77,7 @@ describe('Component Tests', () => {
       );
 
       // WHEN
-      comp.loadPage(1);
+      comp.loadPage();
 
       // THEN
       expect(service.query).toHaveBeenCalled();
@@ -87,7 +87,7 @@ describe('Component Tests', () => {
     it('should calculate the sort attribute for an id', () => {
       // WHEN
       comp.ngOnInit();
-      const result = comp.sort();
+      const result = comp.sortData();
 
       // THEN
       expect(result).toEqual(['id,desc']);
@@ -101,7 +101,7 @@ describe('Component Tests', () => {
       comp.predicate = 'name';
 
       // WHEN
-      const result = comp.sort();
+      const result = comp.sortData();
 
       // THEN
       expect(result).toEqual(['name,desc', 'id']);

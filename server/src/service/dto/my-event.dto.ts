@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsNotEmpty, MinLength, MaxLength, Length, Min, Max, Matches } from 'class-validator';
+import { IsNotEmpty, IsOptional, MaxLength } from 'class-validator';
 import { BaseDTO } from './base.dto';
 
 /**
@@ -29,6 +29,7 @@ export class MyEventDTO extends BaseDTO {
     eventEnd: any;
 
     @MaxLength(200)
+    @IsOptional()
     @ApiModelProperty({ description: 'location field', required: false })
     location: string;
 

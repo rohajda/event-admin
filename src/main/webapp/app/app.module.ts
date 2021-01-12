@@ -17,6 +17,8 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MyMatPaginatorIntl } from 'app/shared/util/MyMatPaginatorIntl';
 
 @NgModule({
   imports: [
@@ -33,6 +35,12 @@ import { NgxMatMomentModule } from '@angular-material-components/moment-adapter'
     EventAdminAppRoutingModule
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  providers: [
+    {
+      provide: MatPaginatorIntl,
+      useClass: MyMatPaginatorIntl
+    }
+  ],
   bootstrap: [MainComponent]
 })
 export class EventAdminAppModule {}

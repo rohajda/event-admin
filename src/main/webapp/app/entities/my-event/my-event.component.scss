@@ -1,0 +1,25 @@
+div.mat-table-wrapper {
+  margin-top: 35px;
+  overflow-x: scroll;
+}
+
+.mat-table-wrapper .mat-table {
+  min-width: 900px;
+  width: 100%;
+}
+
+.mat-column-fullDay {
+  flex: 0 0 130px;
+}
+
+.mat-column-eventStart {
+  flex: 0 0 170px;
+}
+
+.mat-column-eventEnd {
+  flex: 0 0 170px;
+}
+
+.mat-column-actions {
+  flex: 0 0 140px;
+}

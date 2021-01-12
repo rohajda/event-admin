@@ -91,7 +91,15 @@
       }
     },
     "field": {
-      "id": "ID"
+      "id": "ID",
+      "paginator": {
+        "itemsPerPage": "Items per page",
+        "nextPage": "Next page",
+        "previousPage": "Previous page",
+        "range": "{{startIndex}} - {{endIndex}} of {{length}}",
+        "firstPage": "First page",
+        "lastPage": "Last page"
+      }
     },
     "ribbon": {
       "dev": "Development"
@@ -108,7 +116,8 @@
       "edit": "Edit",
       "open": "Open",
       "save": "Save",
-      "view": "View"
+      "view": "View",
+      "operations": "Actions"
     },
     "detail": {
       "field": "Field",

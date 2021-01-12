@@ -2,27 +2,27 @@
   "eventAdminApp": {
     "myEvent": {
       "home": {
-        "title": "My Events",
-        "createLabel": "Pridať My Event",
-        "createOrEditLabel": "Pridať alebo upraviť My Event",
-        "notFound": "No My Events found"
+        "title": "Udalosti",
+        "createLabel": "Pridať udalosť",
+        "createOrEditLabel": "Pridať alebo upraviť udalosť",
+        "notFound": "Žiadne udalosti sa nenašli"
       },
-      "created": "Bol vytvorený potomok entity My Event s identifikátorom {{ param }}",
-      "updated": "Potomok entity My Event s identifikátorom {{ param }} bol upravený.",
-      "deleted": "Potomok entity My Event s identifikátorom {{ param }} bol vymazaný.",
+      "created": "Bola vytvorená udalosť {{ param }}",
+      "updated": "Udalosť {{ param }} bola upravená.",
+      "deleted": "Udalosť {{ param }} bola vymazaná.",
       "delete": {
-        "question": "Ste si istý, že chcete vymazať My Event {{ id }}?"
+        "question": "Ste si istý, že chcete vymazať udalost {{ title }}?"
       },
       "detail": {
-        "title": "My Event"
+        "title": "Udalosť"
       },
-      "title": "Title",
-      "description": "Description",
-      "fullDay": "Full Day",
-      "eventStart": "Event Start",
-      "eventEnd": "Event End",
-      "location": "Location",
-      "eventImage": "Event Image"
+      "title": "Názov",
+      "description": "Popis",
+      "fullDay": "Celodenná",
+      "eventStart": "Začíatok",
+      "eventEnd": "Koniec",
+      "location": "Miesto",
+      "eventImage": "Sprievodný obrázok"
     }
   }
 }

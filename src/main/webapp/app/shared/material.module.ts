@@ -22,6 +22,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatMenuModule } from '@angular/material/menu';
 import { NgModule } from '@angular/core';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   imports: [
@@ -33,6 +36,9 @@ import { NgModule } from '@angular/core';
     MatSnackBarModule,
     MatTooltipModule,
     MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     MatDialogModule,
     MatChipsModule,
     MatSelectModule,
@@ -65,6 +71,9 @@ import { NgModule } from '@angular/core';
     MatMenuModule,
     MatButtonToggleModule,
     MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatGridListModule,

@@ -89,7 +89,15 @@
       }
     },
     "field": {
-      "id": "ID"
+      "id": "ID",
+      "paginator": {
+        "itemsPerPage": "Počet záznamov na stránku",
+        "nextPage": "Nasledovná strana",
+        "previousPage": "Predchádzajúca strana",
+        "range": "{{startIndex}} - {{endIndex}} z {{length}}",
+        "firstPage": "Prvá strana",
+        "lastPage": "Posledná strana"
+      }
     },
     "ribbon": {
       "dev": "Development"
@@ -106,7 +114,8 @@
       "edit": "Upraviť",
       "open": "Open",
       "save": "Uložiť",
-      "view": "Detaily"
+      "view": "Detaily",
+      "operations": "Operácie"
     },
     "detail": {
       "field": "Pole",

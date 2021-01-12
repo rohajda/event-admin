@@ -1,29 +1,38 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
+import { merge, Subscription } from 'rxjs';
+import { JhiDataUtils, JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IMyEvent } from 'app/shared/model/my-event.model';
-
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { MyEventService } from './my-event.service';
 import { MyEventDeleteDialogComponent } from './my-event-delete-dialog.component';
+import { MyEventDatasource } from 'app/entities/my-event/my-event.datasource';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-my-event',
+  styleUrls: ['./my-event.component.scss'],
   templateUrl: './my-event.component.html'
 })
 export class MyEventComponent implements OnInit, OnDestroy {
   myEvents?: IMyEvent[];
-  eventSubscriber?: Subscription;
-  totalItems = 0;
-  itemsPerPage = ITEMS_PER_PAGE;
+
+  private subscriptions: Subscription[] = [];
   page!: number;
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+
+  displayedColumns: string[] = ['title', 'fullDay', 'eventStart', 'eventEnd', 'location', 'actions'];
+  dataSource: MyEventDatasource;
+  @ViewChild(MatPaginator, { static: true })
+  paginator!: MatPaginator;
+
+  @ViewChild(MatSort, { static: true })
+  sort!: MatSort;
 
   constructor(
     protected myEventService: MyEventService,
@@ -32,21 +41,12 @@ export class MyEventComponent implements OnInit, OnDestroy {
     protected router: Router,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
-  ) {}
+  ) {
+    this.dataSource = new MyEventDatasource(this.myEventService);
+  }
 
-  loadPage(page?: number): void {
-    const pageToLoad: number = page || this.page;
-
-    this.myEventService
-      .query({
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort()
-      })
-      .subscribe(
-        (res: HttpResponse<IMyEvent[]>) => this.onSuccess(res.body, res.headers, pageToLoad),
-        () => this.onError()
-      );
+  loadPage(): void {
+    this.dataSource.loadEvents(this.paginator.pageIndex, this.paginator.pageSize, this.sortData());
   }
 
   ngOnInit(): void {
@@ -58,12 +58,21 @@ export class MyEventComponent implements OnInit, OnDestroy {
       this.loadPage();
     });
     this.registerChangeInMyEvents();
+
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+
+    /* Data load will be triggered in two cases:
+  - when a pagination event occurs => this.paginator.page
+  - when a sort event occurs => this.sort.sortChange
+  **/
+    const paginatorSubscriptions = merge(this.sort.sortChange, this.paginator.page)
+      .pipe(tap(() => this.loadPage()))
+      .subscribe();
+    this.subscriptions.push(paginatorSubscriptions);
   }
 
   ngOnDestroy(): void {
-    if (this.eventSubscriber) {
-      this.eventManager.destroy(this.eventSubscriber);
-    }
+    this.subscriptions.forEach(el => el.unsubscribe());
   }
 
   trackId(index: number, item: IMyEvent): number {
@@ -80,7 +89,8 @@ export class MyEventComponent implements OnInit, OnDestroy {
   }
 
   registerChangeInMyEvents(): void {
-    this.eventSubscriber = this.eventManager.subscribe('myEventListModification', () => this.loadPage());
+    const eventSubscriber = this.eventManager.subscribe('myEventListModification', () => this.loadPage());
+    this.subscriptions.push(eventSubscriber);
   }
 
   delete(myEvent: IMyEvent): void {
@@ -88,28 +98,11 @@ export class MyEventComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.myEvent = myEvent;
   }
 
-  sort(): string[] {
-    const result = [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
+  sortData(): string[] {
+    const result = [this.sort.active + ',' + this.sort.direction];
     if (this.predicate !== 'id') {
       result.push('id');
     }
     return result;
-  }
-
-  protected onSuccess(data: IMyEvent[] | null, headers: HttpHeaders, page: number): void {
-    this.totalItems = Number(headers.get('X-Total-Count'));
-    this.page = page;
-    this.router.navigate(['/my-event'], {
-      queryParams: {
-        page: this.page,
-        size: this.itemsPerPage,
-        sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
-      }
-    });
-    this.myEvents = data || [];
-  }
-
-  protected onError(): void {
-    this.ngbPaginationPage = this.page;
   }
 }
