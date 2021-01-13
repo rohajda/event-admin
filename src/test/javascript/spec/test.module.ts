@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiLanguageService, JhiDataUtils, JhiDateUtils, JhiEventManager, JhiAlertService, JhiParseLinks } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils, JhiDateUtils, JhiEventManager, JhiLanguageService, JhiParseLinks } from 'ng-jhipster';
 
 import { MockLanguageService } from './helpers/mock-language.service';
 import { AccountService } from 'app/core/auth/account.service';
@@ -12,6 +12,7 @@ import { MockAccountService } from './helpers/mock-account.service';
 import { MockActivatedRoute, MockRouter } from './helpers/mock-route.service';
 import { MockActiveModal } from './helpers/mock-active-modal.service';
 import { MockEventManager } from './helpers/mock-event-manager.service';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   providers: [
@@ -56,6 +57,6 @@ import { MockEventManager } from './helpers/mock-event-manager.service';
       useValue: null
     }
   ],
-  imports: [HttpClientTestingModule]
+  imports: [HttpClientTestingModule, MatSortModule]
 })
 export class EventAdminTestModule {}

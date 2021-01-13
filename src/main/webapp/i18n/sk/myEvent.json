@@ -21,8 +21,7 @@
       "fullDay": "Celodenná",
       "eventStart": "Začíatok",
       "eventEnd": "Koniec",
-      "location": "Miesto",
-      "eventImage": "Sprievodný obrázok"
+      "location": "Miesto"
     }
   }
 }

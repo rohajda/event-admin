@@ -21,8 +21,7 @@
       "fullDay": "Full Day",
       "eventStart": "Event Start",
       "eventEnd": "Event End",
-      "location": "Location",
-      "eventImage": "Event Image"
+      "location": "Location"
     }
   }
 }

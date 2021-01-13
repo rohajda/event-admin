@@ -100,7 +100,7 @@ export class MyEventComponent implements OnInit, OnDestroy {
 
   sortData(): string[] {
     const result = [this.sort.active + ',' + this.sort.direction];
-    if (this.predicate !== 'id') {
+    if (this.sort.active !== 'id') {
       result.push('id');
     }
     return result;

@@ -6,20 +6,15 @@ WORKDIR /usr/node-app
 
 ENV NODE_SERVER_PORT=8081
 
-COPY . .
+COPY server/dist dist
+COPY server/package.json package.json
 
 # install server deps
 
-WORKDIR server
 
-RUN npm install
-
-# install client deps
-
-WORKDIR ..
-
-RUN npm install
+RUN npm install  && \
+    echo "NODE_ENV=prod" > .env
 
 EXPOSE 8081
 
-ENTRYPOINT ["npm", "run", "start:app" ]
+ENTRYPOINT ["node", "dist/main.js"]

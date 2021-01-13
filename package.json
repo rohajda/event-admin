@@ -132,6 +132,7 @@
     "serve": "npm run start",
     "build": "npm run webpack:prod",
     "build:app": "npm run build && cd server && npm run build",
+    "build:docker": "npm run build:app && docker build -t event-admin .",
     "test": "npm run lint && jest --coverage --logHeapUsage -w=2 --config src/test/javascript/jest.conf.js",
     "test:watch": "npm run test -- --watch",
     "webpack:dev": "npm run webpack-dev-server -- --config webpack/webpack.dev.js --inline --hot --port=9060 --watch-content-base --env.stats=minimal",

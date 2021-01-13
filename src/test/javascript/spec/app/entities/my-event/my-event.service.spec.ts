@@ -1,4 +1,4 @@
-import { TestBed, getTestBed } from '@angular/core/testing';
+import { getTestBed, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new MyEvent(0, 'AAAAAAA', 'AAAAAAA', false, currentDate, currentDate, 'AAAAAAA', 'image/png', 'AAAAAAA');
+      elemDefault = new MyEvent(0, 'AAAAAAA', 'AAAAAAA', false, currentDate, currentDate, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -77,8 +77,7 @@ describe('Service Tests', () => {
             fullDay: true,
             eventStart: currentDate.format(DATE_TIME_FORMAT),
             eventEnd: currentDate.format(DATE_TIME_FORMAT),
-            location: 'BBBBBB',
-            eventImage: 'BBBBBB'
+            location: 'BBBBBB'
           },
           elemDefault
         );
@@ -106,8 +105,7 @@ describe('Service Tests', () => {
             fullDay: true,
             eventStart: currentDate.format(DATE_TIME_FORMAT),
             eventEnd: currentDate.format(DATE_TIME_FORMAT),
-            location: 'BBBBBB',
-            eventImage: 'BBBBBB'
+            location: 'BBBBBB'
           },
           elemDefault
         );

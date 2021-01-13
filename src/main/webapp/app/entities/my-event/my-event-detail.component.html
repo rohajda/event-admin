@@ -35,16 +35,6 @@
                 <dd>
                     <span>{{ myEvent.location }}</span>
                 </dd>
-                <dt><span jhiTranslate='eventAdminApp.myEvent.eventImage'>Event Image</span></dt>
-                <dd>
-                    <div *ngIf='myEvent.eventImage'>
-                        <a (click)='openFile(myEvent?.eventImageContentType!, myEvent?.eventImage)'>
-                            <img [src]="'data:' + myEvent.eventImageContentType + ';base64,' + myEvent.eventImage"
-                                 style='max-width: 100%;' alt='myEvent image' />
-                        </a>
-                        {{ myEvent.eventImageContentType }}, {{ byteSize(myEvent.eventImage) }}
-                    </div>
-                </dd>
             </dl>
 
             <button mat-raised-button type='submit'

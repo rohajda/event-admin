@@ -23,11 +23,12 @@ let ormconfig: TypeOrmModuleOptions = {
 };
 
 if (process.env.NODE_ENV === 'prod') {
+    const dockerJdbcUrl = process.env.JDBC_URL;
     ormconfig = {
         name: 'default',
         type: 'postgres',
         database: 'EventAdmin',
-        url: 'postgresql://YOUR_USER:YOUR_PWD@localhost:27017/EventAdmin',
+        url: `${dockerJdbcUrl}`,
         logging: false,
         synchronize: commonConf.SYNCRONIZE,
         entities: commonConf.ENTITIES,

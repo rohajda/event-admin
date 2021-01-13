@@ -1,0 +1,7 @@
+version: '2'
+services:
+  events:
+    image: event-admin:latest
+    container_name: events
+    ports:
+      - 3000:3000

@@ -28,9 +28,7 @@ export class MyEventUpdateComponent implements OnInit, OnDestroy {
     fullDay: [],
     eventStart: [null, [Validators.required]],
     eventEnd: [null, [Validators.required]],
-    location: [null, [Validators.maxLength(200)]],
-    eventImage: [],
-    eventImageContentType: []
+    location: [null, [Validators.maxLength(200)]]
   });
 
   private subscriptions: Subscription[] = [];
@@ -83,9 +81,7 @@ export class MyEventUpdateComponent implements OnInit, OnDestroy {
       fullDay: myEvent.fullDay,
       eventStart: myEvent.eventStart ? myEvent.eventStart.format(DATE_TIME_FORMAT) : null,
       eventEnd: myEvent.eventEnd ? myEvent.eventEnd.format(DATE_TIME_FORMAT) : null,
-      location: myEvent.location,
-      eventImage: myEvent.eventImage,
-      eventImageContentType: myEvent.eventImageContentType
+      location: myEvent.location
     });
   }
 
@@ -138,9 +134,7 @@ export class MyEventUpdateComponent implements OnInit, OnDestroy {
       fullDay: this.editForm.get(['fullDay'])!.value,
       eventStart: this.editForm.get(['eventStart'])!.value ? moment(this.editForm.get(['eventStart'])!.value, DATE_TIME_FORMAT) : undefined,
       eventEnd: this.editForm.get(['eventEnd'])!.value ? moment(this.editForm.get(['eventEnd'])!.value, DATE_TIME_FORMAT) : undefined,
-      location: this.editForm.get(['location'])!.value,
-      eventImageContentType: this.editForm.get(['eventImageContentType'])!.value,
-      eventImage: this.editForm.get(['eventImage'])!.value
+      location: this.editForm.get(['location'])!.value
     };
   }
 

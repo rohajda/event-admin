@@ -1,4 +1,4 @@
-import { element, by, ElementFinder } from 'protractor';
+import { by, element, ElementFinder } from 'protractor';
 
 export class MyEventComponentsPage {
   createButton = element(by.id('jh-create-entity'));
@@ -35,7 +35,6 @@ export class MyEventUpdatePage {
   eventStartInput = element(by.id('field_eventStart'));
   eventEndInput = element(by.id('field_eventEnd'));
   locationInput = element(by.id('field_location'));
-  eventImageInput = element(by.id('file_eventImage'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -83,14 +82,6 @@ export class MyEventUpdatePage {
 
   async getLocationInput(): Promise<string> {
     return await this.locationInput.getAttribute('value');
-  }
-
-  async setEventImageInput(eventImage: string): Promise<void> {
-    await this.eventImageInput.sendKeys(eventImage);
-  }
-
-  async getEventImageInput(): Promise<string> {
-    return await this.eventImageInput.getAttribute('value');
   }
 
   async save(): Promise<void> {

@@ -26,7 +26,7 @@ export class Sort {
         this.sortList.forEach(value => {
             if (tmpBuffer && (value.toUpperCase() === 'ASC' || value.toUpperCase() === 'DESC')) {
                 order[tmpBuffer] = value.toUpperCase();
-                tmpBuffer = undefined;
+                tmpBuffer = null;
             } else if (tmpBuffer && !(value.toUpperCase() === 'ASC' || value.toUpperCase() === 'DESC')) {
                 order[tmpBuffer] = 'ASC';
                 tmpBuffer = value;

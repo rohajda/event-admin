@@ -7,16 +7,32 @@ import { EventAdminTestModule } from '../../../test.module';
 import { MyEventComponent } from 'app/entities/my-event/my-event.component';
 import { MyEventService } from 'app/entities/my-event/my-event.service';
 import { MyEvent } from 'app/shared/model/my-event.model';
+import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { MockMatPaginator } from '../../../helpers/mock-mat-paginator';
+
+export const createSpyObj = (baseName: string, methodNames: any[]): any => {
+  const obj: any = {};
+
+  for (let i = 0; i < methodNames.length; i++) {
+    obj[methodNames[i]] = jest.fn();
+  }
+
+  return obj;
+};
 
 describe('Component Tests', () => {
   describe('MyEvent Management Component', () => {
     let comp: MyEventComponent;
     let fixture: ComponentFixture<MyEventComponent>;
     let service: MyEventService;
+    let mockPaginator: MockMatPaginator;
 
-    beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [EventAdminTestModule],
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
+        imports: [EventAdminTestModule, MatPaginatorModule, MatSortModule, NoopAnimationsModule, BrowserDynamicTestingModule],
         declarations: [MyEventComponent],
         providers: [
           {
@@ -33,14 +49,24 @@ describe('Component Tests', () => {
                   })
               }
             }
-          }
+          },
+          MatPaginatorIntl
         ]
       })
         .overrideTemplate(MyEventComponent, '')
         .compileComponents();
 
       fixture = TestBed.createComponent(MyEventComponent);
+
       comp = fixture.componentInstance;
+      mockPaginator = TestBed.get(MatPaginator);
+
+      // comp.paginator = createSpyObj('MatPaginator', ['length', 'pageIndex', 'pageSize']);
+      comp.paginator = TestBed.createComponent(MatPaginator).componentInstance;
+
+      comp.sort = new MatSort();
+      fixture.detectChanges();
+
       service = fixture.debugElement.injector.get(MyEventService);
     });
 

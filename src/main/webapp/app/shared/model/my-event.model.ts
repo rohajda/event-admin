@@ -8,8 +8,6 @@ export interface IMyEvent {
   eventStart?: Moment;
   eventEnd?: Moment;
   location?: string;
-  eventImageContentType?: string;
-  eventImage?: any;
 }
 
 export class MyEvent implements IMyEvent {
@@ -20,9 +18,7 @@ export class MyEvent implements IMyEvent {
     public fullDay?: boolean,
     public eventStart?: Moment,
     public eventEnd?: Moment,
-    public location?: string,
-    public eventImageContentType?: string,
-    public eventImage?: any
+    public location?: string
   ) {
     this.fullDay = this.fullDay || false;
   }

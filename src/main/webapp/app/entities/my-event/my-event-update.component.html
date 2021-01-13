@@ -100,32 +100,6 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-
-                <div class='form-group'>
-                    <label class='form-control-label' jhiTranslate='eventAdminApp.myEvent.eventImage'
-                           for='field_eventImage'>Event Image</label>
-                    <div>
-                        <img
-                            [src]="'data:' + editForm.get('eventImageContentType')!.value + ';base64,' + editForm.get('eventImage')!.value"
-                            style='max-height: 100px;' *ngIf="editForm.get('eventImage')!.value" alt='myEvent image' />
-                        <div *ngIf="editForm.get('eventImage')!.value" class='form-text text-danger clearfix'>
-                            <span class='pull-left'>{{ editForm.get('eventImageContentType')!.value }}
-                                , {{ byteSize(editForm.get('eventImage')!.value) }}</span>
-                            <button type='button'
-                                    (click)="clearInputImage('eventImage', 'eventImageContentType', 'file_eventImage')"
-                                    class='btn btn-secondary btn-xs pull-right'>
-                                <fa-icon icon='times'></fa-icon>
-                            </button>
-                        </div>
-                        <input type='file' id='file_eventImage' (change)="setFileData($event, 'eventImage', true)"
-                               accept='image/*' jhiTranslate='entity.action.addimage' />
-                    </div>
-                    <input type='hidden' class='form-control' name='eventImage' id='field_eventImage'
-                           formControlName='eventImage' />
-                    <input type='hidden' class='form-control' name='eventImageContentType'
-                           id='field_eventImageContentType'
-                           formControlName='eventImageContentType' />
-                </div>
             </div>
 
             <div>

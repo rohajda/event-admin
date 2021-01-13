@@ -1,4 +1,4 @@
-import { browser, ExpectedConditions as ec, protractor, promise } from 'protractor';
+import { browser, ExpectedConditions as ec, promise, protractor } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import { MyEventComponentsPage, MyEventDeleteDialog, MyEventUpdatePage } from './my-event.page-object';
@@ -49,8 +49,7 @@ describe('MyEvent e2e test', () => {
       myEventUpdatePage.setDescriptionInput('description'),
       myEventUpdatePage.setEventStartInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       myEventUpdatePage.setEventEndInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-      myEventUpdatePage.setLocationInput('location'),
-      myEventUpdatePage.setEventImageInput(absolutePath)
+      myEventUpdatePage.setLocationInput('location')
     ]);
 
     expect(await myEventUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
@@ -69,10 +68,6 @@ describe('MyEvent e2e test', () => {
     );
     expect(await myEventUpdatePage.getEventEndInput()).to.contain('2001-01-01T02:30', 'Expected eventEnd value to be equals to 2000-12-31');
     expect(await myEventUpdatePage.getLocationInput()).to.eq('location', 'Expected Location value to be equals to location');
-    expect(await myEventUpdatePage.getEventImageInput()).to.endsWith(
-      fileNameToUpload,
-      'Expected EventImage value to be end with ' + fileNameToUpload
-    );
 
     await myEventUpdatePage.save();
     expect(await myEventUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
