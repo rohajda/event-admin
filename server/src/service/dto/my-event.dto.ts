@@ -22,11 +22,11 @@ export class MyEventDTO extends BaseDTO {
 
   @IsNotEmpty()
   @ApiModelProperty({ description: 'eventStart field' })
-  eventStart: any;
+  eventStart: Date;
 
   @IsNotEmpty()
   @ApiModelProperty({ description: 'eventEnd field' })
-  eventEnd: any;
+  eventEnd: Date;
 
   @MaxLength(200)
   @IsOptional()

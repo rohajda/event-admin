@@ -3,11 +3,11 @@
     "title": "EventAdmin",
     "browsehappy": "Používate <strong>zastaraný</strong> prehliadač. Prosím <a href=\"http://browsehappy.com/?locale=en\">aktualizujte svoj prehliadač</a> pre zlepšenie použiteľnosti.",
     "menu": {
-      "home": "Domov",
+      "home": "Prehľad udalostí",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entity",
-        "myEvent": "My Event",
+        "myEvent": "Spravuj udalosti",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

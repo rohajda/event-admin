@@ -1,7 +1,11 @@
 {
   "home": {
-    "title": "Vitajte, Java Hipster!",
+    "title": "Prehľad udalosti",
+    "upcoming": "Nadchádzajúce udalosti",
     "subtitle": "Toto je vaša domovská stránka",
+    "showDetail": "Detail",
+    "startDate": "Od:",
+    "endDate": "Do:",
     "logged": {
       "message": "Ste prihlásený ako \"{{username}}\"."
     },

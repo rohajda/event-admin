@@ -1,7 +1,11 @@
 {
   "home": {
-    "title": "Welcome, Node Hipster Official Blueprint!",
+    "title": "Events overview",
+    "upcoming": "Upcoming events",
     "subtitle": "This is your homepage",
+    "showDetail": "Detail",
+    "startDate": "From:",
+    "endDate": "To:",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },
